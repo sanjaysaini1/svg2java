@@ -22,6 +22,9 @@ import com.btr.svg2java.AbstractSvgTranscoder;
 
 /*****************************************************************************
  * Transcoder that will generate Android canvas painting code out of a svg file.
+ * 
+ * Work in progress.
+ * 
  *
  * @author  Bernd Rosstauscher
  ****************************************************************************/
@@ -60,7 +63,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	/*************************************************************************
 	 * @return
 	 ************************************************************************/
-	
+	@Override
 	protected String generateRenderingHintsCode() {
 		StringBuffer buffer = new StringBuffer();
 		return buffer.toString();
@@ -70,7 +73,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param node
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateTransformCode(GraphicsNode node, StringBuilder buffer) {
 		AffineTransform transform = node.getTransform();
 		if (transform != null) {
@@ -90,7 +93,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param comment
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateTransformPopCode(String comment, StringBuilder buffer) {
 		buffer.append("g.setMatrix(m").append(comment).append(");\n");
 	}
@@ -99,7 +102,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param comment
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateTransformPushCode(String comment, StringBuilder buffer) {
 		buffer.append("Matrix m").append(comment).append(" = g.getMatrix();\n");
 	}
@@ -108,7 +111,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param composite
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateAlphaCompositeCode(AlphaComposite composite, StringBuilder buffer) {
 		int rule = composite.getRule();
 		float alpha = composite.getAlpha();
@@ -122,7 +125,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param bStroke
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateBasicStrokeCode(BasicStroke bStroke,
 			StringBuilder buffer) {
 		float width = bStroke.getLineWidth();
@@ -154,7 +157,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param shapeName
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateShapeDrawCode(String shapeName, StringBuilder buffer) {
 		String paintName = ""; // TODO rossi 04.07.2010 merge paint with fill?
 		buffer.append(shapeName).append("draw(g, ").append(paintName).append(");\n");
@@ -164,7 +167,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param shapeName
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateShapeFillCode(String shapeName, StringBuilder buffer) {
 		String paintName = ""; // TODO rossi 04.07.2010  merge paint with draw?
 		buffer.append(shapeName).append("draw(g, ").append(paintName).append(");\n");
@@ -174,7 +177,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param paint
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected void generateSetColorCode(Color c, StringBuilder buffer) {
 		// TODO rossi 04.07.2010 store it and make it available as lastPaint;
 //		buffer.append("g.setPaint(new Color(").append(c.getRed()).append(", ")
@@ -190,6 +193,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @throws IllegalArgumentException
 	 *             if the fractions are not strictly increasing.
 	 */
+	@Override
 	protected void generateRadialGradientPaintCode(RadialGradientPaint paint, StringBuilder buffer)
 			throws IllegalArgumentException {
 		Point2D centerPoint = paint.getCenterPoint();
@@ -230,6 +234,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @throws IllegalArgumentException
 	 *             if the fractions are not strictly increasing.
 	 */
+	@Override
 	protected void generateLinearGradientPaintCode(LinearGradientPaint paint, StringBuilder buffer)
 			throws IllegalArgumentException {
 		Point2D startPoint = paint.getStartPoint();
@@ -246,7 +251,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param shape
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected String generateRectangle2DCode(Rectangle2D rect, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
 		buffer.append("Rectangle2D.Double "+shapeName+" = new Rectangle2D.Double(").append(rect.getX())
@@ -259,7 +264,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param buffer
 	 * @param rRect
 	 ************************************************************************/
-	
+	@Override
 	protected String generateRoundRectangle2DCode(RoundRectangle2D rRect, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
 		buffer.append("RoundRectangle2D.Double "+shapeName+" = new RoundRectangle2D.Double(")
@@ -273,7 +278,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param ell
 	 * @param buffer
 	 ************************************************************************/
-	
+	@Override
 	protected String generateElipse2DCode(Ellipse2D ell, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
 		buffer.append("Ellipse2D.Double "+shapeName+" = new Ellipse2D.Double(").append(ell.getX())
@@ -286,7 +291,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param buffer
 	 * @param l2df
 	 ************************************************************************/
-	
+	@Override
 	protected String generateLine2DFloatCode(Line2D.Float l2df, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
 		buffer.append("Line2D.Float "+shapeName+" = new Line2D.Float(")
@@ -304,6 +309,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	 * @param pathIterator
 	 *            Path iterator.
 	 */
+	@Override
 	protected String generatePathIteratorCode(PathIterator pathIterator, StringBuilder buffer) {
 		float[] coords = new float[6];
 		String shapeName = "shape"+getNextID();
@@ -473,6 +479,20 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 			cycleMethodRep = "MultipleGradientPaint.CycleMethod.REPEAT";
 		}
 		return cycleMethodRep;
+	}
+
+	@Override
+	protected void generateMethodInvocationCode(GraphicsNode node,
+			String methodPostfix, StringBuilder buffer) {
+		// TODO rossi 13.07.2010 Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void generatePaintMethodSignatureCode(GraphicsNode node,
+			String methodPostfix, StringBuilder buffer) {
+		// TODO rossi 13.07.2010 Auto-generated method stub
+		
 	}
 
 
