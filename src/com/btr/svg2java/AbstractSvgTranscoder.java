@@ -218,13 +218,13 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 ************************************************************************/
 	
 	private String injectPaintingCode(String templateString) {
-		templateString = templateString.replace(TOKEN_PAINTING_CODE,
+		String result = templateString.replace(TOKEN_PAINTING_CODE,
 				this.paintingCodeBuffer.toString());
-		templateString = templateString.replace(TOKEN_RENDERING_HINTS, 
+		result = result.replace(TOKEN_RENDERING_HINTS, 
 				generateRenderingHintsCode());
-		templateString = templateString.replace(TOKEN_METHOD_CODE,
+		result = result.replace(TOKEN_METHOD_CODE,
 				this.methodCodeBuffer.toString());
-		return templateString;
+		return result;
 	}
 
 	/*************************************************************************
@@ -267,15 +267,15 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 ************************************************************************/
 	
 	private String injectImageBounds(Rectangle2D bounds,String templateString) {
-		templateString = templateString.replace(TOKEN_ORIG_X, ""
+		String result = templateString.replace(TOKEN_ORIG_X, ""
 				+ (int) Math.ceil(bounds.getX()));
-		templateString = templateString.replace(TOKEN_ORIG_Y, ""
+		result = result.replace(TOKEN_ORIG_Y, ""
 				+ (int) Math.ceil(bounds.getY()));
-		templateString = templateString.replace(TOKEN_ORIG_WIDTH, ""
+		result = result.replace(TOKEN_ORIG_WIDTH, ""
 				+ (int) Math.ceil(bounds.getWidth()));
-		templateString = templateString.replace(TOKEN_ORIG_HEIGHT, ""
+		result = result.replace(TOKEN_ORIG_HEIGHT, ""
 				+ (int) Math.ceil(bounds.getHeight()));
-		return templateString;
+		return result;
 	}
 
 	/*************************************************************************
