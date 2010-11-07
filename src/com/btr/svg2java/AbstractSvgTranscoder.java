@@ -177,6 +177,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 			transcoder.transcode(ti, null);
 			this.transcode(transcoder.getGVTRoot());
 		} catch (Exception exc) {
+			notifyUnsupportedOperation(null, exc.getMessage());
 			exc.printStackTrace();
 		} finally {
 			closeWriter();
