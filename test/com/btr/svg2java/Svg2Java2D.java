@@ -17,11 +17,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
 import javax.swing.BorderFactory;
@@ -269,10 +271,10 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 			try {
 				InputStream source = new FileInputStream(file);
 				if (file.getName().toLowerCase().endsWith(SvgFileFilter.SVGZ_FILE_EXTENSION)) {
-					source = new ZipInputStream(source);
+					source = new GZIPInputStream(source);
 				}
 				return source;
-			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
