@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
@@ -24,7 +25,6 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.ZipInputStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -83,8 +83,8 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		canvas.setDoubleBufferedRendering(true);
 		canvas.setEnableZoomInteractor(true);
 		canvas.setEnablePanInteractor(true);
-		canvas.setOpaque(false);
 		canvas.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		canvas.setBackground(Color.DARK_GRAY);
 		
 		FileDnDSupport fileDnDSupport = new FileDnDSupport();
 		fileDnDSupport.addDropTarget(canvas);
@@ -93,7 +93,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		
 		
 		JPanel canvasBG = new JPanel(new GridBagLayout());
-		canvasBG.setBackground(Color.WHITE);
+		canvasBG.setBackground(Color.DARK_GRAY);
 		canvasBG.setOpaque(true);
 		canvasBG.add(canvas);
 		JScrollPane csc = new JScrollPane(canvasBG);
@@ -104,6 +104,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 
 		this.sourceArea = new JTextArea();
 		sourceArea.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		sourceArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane sc = new JScrollPane(sourceArea);
 		rightPanel.add(sc, BorderLayout.CENTER);
 		
