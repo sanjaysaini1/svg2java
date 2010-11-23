@@ -61,7 +61,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	}
 	
 	/*************************************************************************
-	 * @return
+	 * @return the generated code
 	 ************************************************************************/
 	@Override
 	protected String generateRenderingHintsCode() {
@@ -121,7 +121,6 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param strokeName
 	 * @param bStroke
 	 * @param buffer
 	 ************************************************************************/
@@ -174,7 +173,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param paint
+	 * @param c
 	 * @param buffer
 	 ************************************************************************/
 	@Override
@@ -248,7 +247,7 @@ public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param shape
+	 * @param rect
 	 * @param buffer
 	 ************************************************************************/
 	@Override

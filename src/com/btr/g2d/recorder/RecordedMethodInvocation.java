@@ -16,7 +16,7 @@ public class RecordedMethodInvocation {
 
 	/*************************************************************************
 	 * Constructor
-	 * @param method the name of the method invoked.
+	 * @param methodId the id of the method invoked.
 	 * @param params the list of parameters.
 	 ************************************************************************/
 
@@ -35,7 +35,7 @@ public class RecordedMethodInvocation {
 	}
 
 	/*************************************************************************
-	 * @param methodName The methodName to set.
+	 * @param methodId The id to set.
 	 ************************************************************************/
 
 	public void setMethodId(int methodId) {

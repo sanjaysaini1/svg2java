@@ -92,11 +92,6 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	
 	/**
 	 * Creates a new transcoder.
-	 * 
-	 * @param uri
-	 *            URI of the SVG image.
-	 * @param javaClassname
-	 *            Classname for the generated Java2D code.
 	 */
 	public AbstractSvgTranscoder() {
 		super();
@@ -228,7 +223,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @return
+	 * @return the generated code
 	 ************************************************************************/
 	
 	protected abstract String generateRenderingHintsCode();
@@ -358,7 +353,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * Transcodes the specified path iterator.
 	 * @param pathIterator
 	 * @param buffer
-	 * @return
+	 * @return the generated code
 	 ************************************************************************/
 	
 	protected abstract String generatePathIteratorCode(PathIterator pathIterator, StringBuilder buffer);
@@ -367,7 +362,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * Transcodes the specified shape.
 	 * @param shape
 	 * @param buffer
-	 * @return
+	 * @return the generated code
 	 ************************************************************************/
 	
 	private String transcodeShape(Shape shape, StringBuilder buffer) {
@@ -418,8 +413,9 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	protected abstract String generateRoundRectangle2DCode(RoundRectangle2D rRect, StringBuilder buffer);
 
 	/*************************************************************************
-	 * @param shape
+	 * @param rect
 	 * @param buffer
+	 * @return the generated code
 	 ************************************************************************/
 	
 	protected abstract String generateRectangle2DCode(Rectangle2D rect, StringBuilder buffer);
@@ -483,7 +479,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param paint
+	 * @param c
 	 * @param buffer
 	 ************************************************************************/
 	
@@ -636,7 +632,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @return
+	 * @return the next higher counter.
 	 ************************************************************************/
 	
 	protected int getNextID() {
@@ -753,7 +749,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param sectionBuffer
+	 * @param buffer
 	 ************************************************************************/
 	
 	protected void generateMethodClose(StringBuilder buffer) {

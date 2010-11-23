@@ -44,8 +44,8 @@ public class ParameterTranscoderFactory {
 	}
 	
 	/*************************************************************************
-	 * @param o
-	 * @return
+	 * @param o object to find a transcoder for.
+	 * @return the transcoder parameter.
 	 ************************************************************************/
 	
 	public static ParameterTranscoder getTranscoderForType(Object o) {

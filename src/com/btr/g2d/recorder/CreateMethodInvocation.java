@@ -27,7 +27,7 @@ public class CreateMethodInvocation extends RecordedMethodInvocation {
 	/*************************************************************************
 	 * setMethodName
 	 * Will do nothing. This class is hardcoded to the "create" method.
-	 * @see amos.client.util.graphics.recorder.RecordedMethodInvocation#setMethodId(java.lang.String)
+	 * @see RecordedMethodInvocation#setMethodId(int)
 	 ************************************************************************/
 	@Override
 	public void setMethodId(int methodId) {

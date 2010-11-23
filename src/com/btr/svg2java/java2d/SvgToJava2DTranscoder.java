@@ -101,7 +101,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	}
 	
 	/*************************************************************************
-	 * @return
+	 * @return the generated code
 	 ************************************************************************/
 	@Override
 	protected String generateRenderingHintsCode() {
@@ -166,7 +166,6 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param strokeName
 	 * @param bStroke
 	 * @param buffer
 	 ************************************************************************/
@@ -224,7 +223,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param paint
+	 * @param c
 	 * @param buffer
 	 ************************************************************************/
 	@Override
@@ -334,7 +333,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	}
 
 	/*************************************************************************
-	 * @param shape
+	 * @param rect
 	 * @param buffer
 	 ************************************************************************/
 	@Override
