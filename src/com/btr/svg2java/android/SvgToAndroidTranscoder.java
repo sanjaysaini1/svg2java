@@ -25,8 +25,8 @@ import com.btr.svg2java.AbstractSvgTranscoder;
  * 
  * Work in progress.
  * 
- *
- * @author  Bernd Rosstauscher
+ * @author  Bernd Rosstauscher 
+ *         (svg2java(@)rosstauscher.de)
  ****************************************************************************/
 
 public class SvgToAndroidTranscoder extends AbstractSvgTranscoder {
