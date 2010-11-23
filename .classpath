@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/xerces_2_5_0.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-ext.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/jsyntaxpane-0.9.5-b29.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
