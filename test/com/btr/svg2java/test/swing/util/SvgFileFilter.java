@@ -1,4 +1,4 @@
-package com.btr.svg2java;
+package com.btr.svg2java.test.swing.util;
 
 import java.io.File;
 
@@ -11,17 +11,17 @@ import javax.swing.filechooser.FileFilter;
  *         (svg2java(@)rosstauscher.de)
  ****************************************************************************/
 
-final class SvgFileFilter extends FileFilter implements java.io.FileFilter {
+public final class SvgFileFilter extends FileFilter implements java.io.FileFilter {
 
-	static final String SVGZ_FILE_EXTENSION = ".svgz";
-	static final String SVG_FILE_EXTENSION = ".svg";
+	public static final String SVGZ_FILE_EXTENSION = ".svgz";
+	public static final String SVG_FILE_EXTENSION = ".svg";
 
 	/*************************************************************************
 	 * Constructor
 	 * @param testViewer
 	 ************************************************************************/
 	
-	SvgFileFilter() {
+	public SvgFileFilter() {
 		super();
 	}
 

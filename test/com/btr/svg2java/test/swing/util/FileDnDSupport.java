@@ -1,4 +1,4 @@
-package com.btr.svg2java;
+package com.btr.svg2java.test.swing.util;
 
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;

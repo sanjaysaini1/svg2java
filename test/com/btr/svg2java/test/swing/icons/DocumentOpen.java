@@ -1,4 +1,4 @@
-package com.btr.svg2java.icons;
+package com.btr.svg2java.test.swing.icons;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;

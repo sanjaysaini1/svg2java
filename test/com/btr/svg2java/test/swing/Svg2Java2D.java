@@ -1,4 +1,4 @@
-package com.btr.svg2java;
+package com.btr.svg2java.test.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,10 +43,13 @@ import jsyntaxpane.DefaultSyntaxKit;
 
 import org.apache.batik.swing.JSVGCanvas;
 
-import com.btr.svg2java.FileDnDSupport.FileDropListener;
-import com.btr.svg2java.icons.AppIcon;
-import com.btr.svg2java.icons.DocumentOpen;
 import com.btr.svg2java.java2d.SvgToJava2DTranscoder;
+import com.btr.svg2java.test.swing.icons.AppIcon;
+import com.btr.svg2java.test.swing.icons.DocumentOpen;
+import com.btr.svg2java.test.swing.util.FileDnDSupport;
+import com.btr.svg2java.test.swing.util.FileDnDSupport.FileDropListener;
+import com.btr.svg2java.test.swing.util.SvgFileFilter;
+import com.btr.svg2java.test.swing.util.TransparentBackgroundPaint;
 import com.btr.svg2java.util.ClassNamingHelper;
 import com.btr.svg2java.util.TranscodeListenerAdapter;
 
