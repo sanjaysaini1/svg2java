@@ -33,6 +33,11 @@
 		<javac debug="true" classpath="${libs}/batik-all.jar;${libs}/jsyntaxpane-0.9.5-b29.jar" 
 			srcdir="${src}" destdir="${classes}" source="1.6" target="1.6" > 
 		</javac>
+		<copy todir="${classes}">
+		   <fileset dir="${src}"> 
+		    	<include name="**/*.templ"/>
+		   </fileset>
+		</copy>
 	</target>
 
 	<target name="compile_test" depends="compile" description="compile the source of the test classes">
@@ -77,8 +82,8 @@
 				<attribute name="Implementation-Title" value="svg2java" />
 				<attribute name="Implementation-Version" value="${DSTAMP}" />
 
-				<attribute name="Class-Path" value="batik-all.jar;jsyntaxpane-0.9.5-b29.jar;xerces_2_5_0.jar;xml-apis-ext.jar;xml-apis.jar" />
-				<attribute name="Main-Class" value="com.btr.svg2java.Svg2Java2D" />
+				<attribute name="Class-Path" value="batik-all.jar jsyntaxpane-0.9.5-b29.jar xerces_2_5_0.jar xml-apis-ext.jar xml-apis.jar" />
+				<attribute name="Main-Class" value="com.btr.svg2java.test.swing.Svg2Java2D" />
 			</manifest>
 		</jar>
 	</target>
