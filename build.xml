@@ -26,6 +26,7 @@
 	<target name="init">
 		<delete dir="${classes}" />
 		<mkdir dir="${classes}" />
+		<mkdir dir="${classes}/images" />
 		<mkdir dir="${deploy}" />
 	</target>
 
@@ -36,6 +37,11 @@
 		<copy todir="${classes}">
 		   <fileset dir="${src}"> 
 		    	<include name="**/*.templ"/>
+		   </fileset>
+		</copy>
+		<copy todir="${classes}/images/">
+		   <fileset dir="misc"> 
+		    	<include name="splash.png"/>
 		   </fileset>
 		</copy>
 	</target>
@@ -84,6 +90,7 @@
 
 				<attribute name="Class-Path" value="batik-all.jar jsyntaxpane-0.9.5-b29.jar xerces_2_5_0.jar xml-apis-ext.jar xml-apis.jar" />
 				<attribute name="Main-Class" value="com.btr.svg2java.test.swing.Svg2Java2D" />
+				<attribute name="SplashScreen-Image" value="images/splash.png" />
 			</manifest>
 		</jar>
 	</target>
