@@ -124,8 +124,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * addListener
 	 * @see com.btr.svg2java.SvgTranscoder#addListener(com.btr.svg2java.TranscoderListener)
 	 ************************************************************************/
-	
-	
+	@Override
 	public final void addListener(TranscoderListener listener) {
 		if (this.listener == null) {
 			this.listener = new ArrayList<TranscoderListener>();
@@ -137,7 +136,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * removeListener
 	 * @see com.btr.svg2java.SvgTranscoder#removeListener(com.btr.svg2java.TranscoderListener)
 	 ************************************************************************/
-	
+	@Override
 	public final boolean removeListener(TranscoderListener listener) {
 		if (this.listener != null) {
 			return this.listener.remove(listener);
@@ -166,7 +165,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * transcode
 	 * @see com.btr.svg2java.SvgTranscoder#transcode(java.io.InputStream, java.io.Writer, java.lang.String)
 	 ************************************************************************/
-	
+	@Override
 	public void transcode(InputStream is, Writer destination, String javaClassname) {
 		setClassName(javaClassname);
 		setPrintWriter(new PrintWriter(destination));
@@ -722,7 +721,7 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 ************************************************************************/
 	
 	private void transcodeGraphicsNode(GraphicsNode node, String comment, StringBuilder buffer) {
-		buffer.append("// ").append(comment).append("\n");
+		buffer.append("\t\t// ").append(comment).append("\n");
 		transcodeAlphaComposite(node, buffer);
 		generateTransformPushCode(comment, buffer);
 		generateTransformCode(node, buffer);
@@ -757,8 +756,8 @@ public abstract class AbstractSvgTranscoder implements SvgTranscoder {
 	 * @param sectionBuffer
 	 ************************************************************************/
 	
-	private void generateMethodClose(StringBuilder buffer) {
-		buffer.append("}\n\n");
+	protected void generateMethodClose(StringBuilder buffer) {
+		buffer.append("\t}\n\n");
 	}
 
 	/*************************************************************************

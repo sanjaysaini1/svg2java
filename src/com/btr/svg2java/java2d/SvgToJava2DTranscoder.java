@@ -81,7 +81,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generatePaintMethodSignatureCode(GraphicsNode node, String methodPostfix, StringBuilder buffer) {
-		buffer.append("private void paint")
+		buffer.append("\tprivate void paint")
 			.append(node.getClass().getSimpleName())
 			.append(methodPostfix)
 			.append("(Graphics2D g) {\n");
@@ -94,7 +94,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected void generateMethodInvocationCode(GraphicsNode node, String methodPostfix,
 			StringBuilder buffer) {
-		buffer.append("paint")
+		buffer.append("\t\tpaint")
 			.append(node.getClass().getSimpleName())
 			.append(methodPostfix)
 			.append("(g);\n");
@@ -107,10 +107,10 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	protected String generateRenderingHintsCode() {
 		StringBuffer buffer = new StringBuffer();
 		if (this.isAntialiasingOn) {
-			buffer.append("g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);");
+			buffer.append("\t\tg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);");
 		}
 		if (this.isStrokePure) {
-			buffer.append("g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);");
+			buffer.append("\t\tg.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);");
 		}
 		return buffer.toString();
 	}
@@ -124,7 +124,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 		AffineTransform transform = node.getTransform();
 		if (transform != null) {
 			double[] transfMatrix = getTransformMatrixForGradient(transform);
-			buffer.append("g.transform(new AffineTransform(")
+			buffer.append("\t\tg.transform(new AffineTransform(")
 					.append(transfMatrix[0]).append("f, ")
 					.append(transfMatrix[1]).append("f, ")
 					.append(transfMatrix[2]).append("f, ")
@@ -140,7 +140,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateTransformPopCode(String comment, StringBuilder buffer) {
-		buffer.append("g.setTransform(trans").append(comment)
+		buffer.append("\t\tg.setTransform(trans").append(comment)
 				.append(");\n");
 	}
 
@@ -150,7 +150,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateTransformPushCode(String comment, StringBuilder buffer) {
-		buffer.append("AffineTransform trans").append(comment)
+		buffer.append("\t\tAffineTransform trans").append(comment)
 				.append(" = g.getTransform();\n");
 	}
 	
@@ -160,7 +160,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateAlphaCompositeCode(AlphaComposite composite, StringBuilder buffer) {
-		buffer.append("g.setComposite(AlphaComposite.getInstance(")
+		buffer.append("\t\tg.setComposite(AlphaComposite.getInstance(")
 				.append(composite.getRule()).append(", ")
 				.append(composite.getAlpha()).append("f * origAlpha));\n");
 	}
@@ -174,7 +174,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	protected void generateBasicStrokeCode(BasicStroke bStroke,
 			StringBuilder buffer) {
 		String dashRep = getDashRepresentation(bStroke.getDashArray());
-		buffer.append("g.setStroke(new BasicStroke(")
+		buffer.append("\t\tg.setStroke(new BasicStroke(")
 			.append(bStroke.getLineWidth()).append("f,")
 			.append(bStroke.getEndCap()).append(",")
 			.append(bStroke.getLineJoin()).append(",")
@@ -211,7 +211,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateShapeDrawCode(String shapeName, StringBuilder buffer) {
-		buffer.append("g.draw("+shapeName+");\n");
+		buffer.append("\t\tg.draw("+shapeName+");\n");
 	}
 
 	/*************************************************************************
@@ -220,7 +220,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateShapeFillCode(String shapeName, StringBuilder buffer) {
-		buffer.append("g.fill("+shapeName+");\n");
+		buffer.append("\t\tg.fill("+shapeName+");\n");
 	}
 
 	/*************************************************************************
@@ -229,7 +229,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	@Override
 	protected void generateSetColorCode(Color c, StringBuilder buffer) {
-		buffer.append("g.setPaint(new Color(")
+		buffer.append("\t\tg.setPaint(new Color(")
 			.append(c.getRed()).append(", ")
 			.append(c.getGreen()).append(", ")
 			.append(c.getBlue()).append(", ")
@@ -245,7 +245,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 			throws IllegalArgumentException {
 		Point2D centerPoint = paint.getCenterPoint();
 		Point2D focusPoint = paint.getFocusPoint();
-		buffer.append("g.setPaint(new RadialGradientPaint(new Point2D.Double(")
+		buffer.append("\t\tg.setPaint(new RadialGradientPaint(new Point2D.Double(")
 			.append(centerPoint.getX()).append(", ")
 			.append(centerPoint.getY()).append("), ")
 			.append(paint.getRadius())
@@ -323,7 +323,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 			throws IllegalArgumentException {
 		Point2D startPoint = paint.getStartPoint();
 		Point2D endPoint = paint.getEndPoint();
-		buffer.append("g.setPaint(new LinearGradientPaint(new Point2D.Double(")
+		buffer.append("\t\tg.setPaint(new LinearGradientPaint(new Point2D.Double(")
 			.append(startPoint.getX()).append(", ")
 			.append(startPoint.getY())
 			.append("), new Point2D.Double(")
@@ -340,7 +340,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected String generateRectangle2DCode(Rectangle2D rect, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
-		buffer.append("Rectangle2D.Double ")
+		buffer.append("\t\tRectangle2D.Double ")
 			.append(shapeName)
 			.append(" = new Rectangle2D.Double(")
 			.append(rect.getX()).append(", ")
@@ -357,7 +357,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected String generateRoundRectangle2DCode(RoundRectangle2D rRect, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
-		buffer.append("RoundRectangle2D.Double ")
+		buffer.append("\t\tRoundRectangle2D.Double ")
 			.append(shapeName)
 			.append(" = new RoundRectangle2D.Double(")
 			.append(rRect.getX()).append(", ")
@@ -376,7 +376,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected String generateElipse2DCode(Ellipse2D ell, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
-		buffer.append("Ellipse2D.Double ")
+		buffer.append("\t\tEllipse2D.Double ")
 			.append(shapeName)
 			.append(" = new Ellipse2D.Double(")
 			.append(ell.getX()).append(", ")
@@ -393,7 +393,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected String generateLine2DFloatCode(Line2D.Float l2df, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
-		buffer.append("Line2D.Float ")
+		buffer.append("\t\tLine2D.Float ")
 			.append(shapeName)
 			.append(" = new Line2D.Float(")
 			.append(l2df.x1).append("f,")
@@ -411,7 +411,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	@Override
 	protected String generatePathIteratorCode(PathIterator pathIterator, StringBuilder buffer) {
 		String shapeName = "shape"+getNextID();
-		buffer.append("GeneralPath ")
+		buffer.append("\t\tGeneralPath ")
 			.append(shapeName)
 			.append(" = new GeneralPath();\n");
 
@@ -445,7 +445,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	 ************************************************************************/
 	
 	private void generatePathCloseCode(String shapeName, StringBuilder buffer) {
-		buffer.append(shapeName).append(".closePath();\n");
+		buffer.append("\t\t").append(shapeName).append(".closePath();\n");
 	}
 
 	/*************************************************************************
@@ -456,7 +456,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	
 	private void generatePathLineToCode(String shapeName, float[] coords,
 			StringBuilder buffer) {
-		buffer.append(shapeName).append(".lineTo(")
+		buffer.append("\t\t").append(shapeName).append(".lineTo(")
 			.append(coords[0]).append(", ")
 			.append(coords[1]).append(");\n");
 	}
@@ -470,7 +470,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	
 	private void generatePathMoveToCode(String shapeName, float[] coords,
 			StringBuilder buffer) {
-		buffer.append(shapeName).append(".moveTo(")
+		buffer.append("\t\t").append(shapeName).append(".moveTo(")
 			.append(coords[0]).append(", ")
 			.append(coords[1]).append(");\n");
 	}
@@ -484,7 +484,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	
 	private void generatePathQuadToCode(String shapeName, float[] coords,
 			StringBuilder buffer) {
-		buffer.append(shapeName).append(".quadTo(")
+		buffer.append("\t\t").append(shapeName).append(".quadTo(")
 			.append(coords[0]).append(", ")
 			.append(coords[1]).append(", ")
 			.append(coords[2]).append(", ")
@@ -500,7 +500,7 @@ public class SvgToJava2DTranscoder extends AbstractSvgTranscoder {
 	
 	private void generatePathCubicToCode(String shapeName, float[] coords,
 			StringBuilder buffer) {
-		buffer.append(shapeName).append(".curveTo(")
+		buffer.append("\t\t").append(shapeName).append(".curveTo(")
 			.append(coords[0]).append(", ")
 			.append(coords[1]).append(", ")
 			.append(coords[2]).append(", ")
