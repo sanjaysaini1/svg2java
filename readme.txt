@@ -53,5 +53,12 @@ The Apache Batik library is needed to read the SVG files.
 It is licensed under Apache License, Version 2.0 
 and is included in this project.
 
+The GUI test program uses jsyntaxpane for the source code display area.
+
+To use the text program you need to execute the class 
+
+com.btr.svg2java.Svg2Java2D
+
+
 Have fun,
 - Bernd Rosstauscher (svg2java@rosstauscher.de) 
