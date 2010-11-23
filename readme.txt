@@ -38,7 +38,7 @@ The current implementation as some known problems:
   (Java 64K per method limit)
 
 
-The idea and the initial code is taken from the flamingo project 
+The idea and the initial code is taken from the Flamingo project 
 
 https://flamingo.dev.java.net/
 
@@ -56,9 +56,14 @@ and is included in this project.
 The GUI test program uses jsyntaxpane for the source code display area.
 
 To use the text program you need to execute the class 
-
 com.btr.svg2java.Svg2Java2D
 
+So to start the GUI test program you have to download and extract the binary distribution,
+unzip all jar files to a folder and execute in this folder
+
+java -jar svg2java_20101123.jar  
+
+This will launch the program.
 
 Have fun,
 - Bernd Rosstauscher (svg2java@rosstauscher.de) 
