@@ -28,6 +28,7 @@ import java.util.zip.GZIPInputStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -37,6 +38,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+
+import jsyntaxpane.DefaultSyntaxKit;
 
 import org.apache.batik.swing.JSVGCanvas;
 
@@ -48,10 +51,10 @@ import com.btr.svg2java.util.ClassNamingHelper;
 import com.btr.svg2java.util.TranscodeListenerAdapter;
 
 /*****************************************************************************
- * Test program to generate java code from a given SVG 
+ * Test program to generate java code from a given SVG
  *
- * @author  BROS
- * @version 1.0
+ * @author  Bernd Rosstauscher 
+ *         (svg2java(@)rosstauscher.de)
  ****************************************************************************/
 
 public class Svg2Java2D extends JFrame implements FileDropListener {
@@ -60,7 +63,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 	
 	private JSVGCanvas canvas;
 	private File file;
-	private JTextArea sourceArea;
+	private JEditorPane sourceArea;
 	private JTextArea logArea;
 	private JProgressBar progressBar;
 	
@@ -84,7 +87,8 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		canvas.setEnableZoomInteractor(true);
 		canvas.setEnablePanInteractor(true);
 		canvas.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-		canvas.setBackground(Color.DARK_GRAY);
+		TransparentBackgroundPaint bgPaint = new TransparentBackgroundPaint(Color.WHITE, Color.GRAY, 25);
+		canvas.setBackground(bgPaint);
 		
 		FileDnDSupport fileDnDSupport = new FileDnDSupport();
 		fileDnDSupport.addDropTarget(canvas);
@@ -93,7 +97,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		
 		
 		JPanel canvasBG = new JPanel(new GridBagLayout());
-		canvasBG.setBackground(Color.DARK_GRAY);
+		canvasBG.setBackground(bgPaint);
 		canvasBG.setOpaque(true);
 		canvasBG.add(canvas);
 		JScrollPane csc = new JScrollPane(canvasBG);
@@ -102,10 +106,12 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		JPanel rightPanel = new JPanel(new BorderLayout());
 		rightPanel.setBorder(BorderFactory.createTitledBorder("Java Code"));
 
-		this.sourceArea = new JTextArea();
+		DefaultSyntaxKit.initKit();
+		this.sourceArea = new JEditorPane();
+		JScrollPane sc = new JScrollPane(sourceArea);
+		sourceArea.setContentType("text/java");
 		sourceArea.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		sourceArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		JScrollPane sc = new JScrollPane(sourceArea);
 		rightPanel.add(sc, BorderLayout.CENTER);
 		
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -141,8 +147,9 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		JPanel panLog = new JPanel(new BorderLayout());
 		panLog.add(sc, BorderLayout.CENTER);
 		panLog.setBorder(BorderFactory.createTitledBorder("Processing Log"));
+		
+		
 		mainPanel.add(panLog, BorderLayout.SOUTH);
-
 		mainPanel.add(buttonPanel, BorderLayout.NORTH);
 		
 		setContentPane(mainPanel);
@@ -178,7 +185,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 	}
 	
 	/*************************************************************************
-	 * 
+	 * Shows a file chooser to load an SVG image file
 	 ************************************************************************/
 	
 	private void openFile() {
@@ -215,7 +222,8 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 	}
 
 	/*************************************************************************
-	 * @param args
+	 * Main entry point of the application.
+	 * @param args command line arguments.
 	 ************************************************************************/
 	
 	public static void main(String[] args) {
@@ -228,7 +236,8 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 	}
 	
 	/*************************************************************************
-	 * @param e
+	 * Helper method to log exceptions to the logging area.
+	 * @param e exception that occurred.
 	 ************************************************************************/
 	
 	private void logException(Throwable e) {
@@ -238,10 +247,7 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 	}
 	
 	/*****************************************************************************
-	 * Worker to do the heavy stuff.
-	 *
-	 * @author  Bernd Rosstauscher 
-	 *         (svg2java(@)rosstauscher.de)
+	 * Worker to do the heavy stuff in the background.
 	 ****************************************************************************/
 	
 	private final class ConvertWorker extends SwingWorker<String, String> {
@@ -259,12 +265,15 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 			String className = ClassNamingHelper.getClassNameFromFileName(file.getName());
 			InputStream source = getSvgSource();
 			trans.transcode(source, new PrintWriter(buffer), DEFAULT_PACKAGE+className);
-			logArea.append("Finished\n");
+			
+			publish("Finished");
+
 			return buffer.toString();
 		}
 
 		/*************************************************************************
-		 * @return
+		 * Builds the correct input stream to read the SVG content.
+		 * @return the input stream.
 		 * @throws FileNotFoundException
 		 ************************************************************************/
 		

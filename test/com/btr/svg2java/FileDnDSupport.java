@@ -25,7 +25,8 @@ import java.util.StringTokenizer;
  * multiple components to enable file DnD on them. By registering a 
  * FileDropListener you can react on file drops.
  *
- * @author  Bernd Rosstauscher (java@rosstauscher.de)
+ * @author  Bernd Rosstauscher 
+ *         (svg2java(@)rosstauscher.de)
  ****************************************************************************/
 
 public class FileDnDSupport extends DropTargetAdapter {
