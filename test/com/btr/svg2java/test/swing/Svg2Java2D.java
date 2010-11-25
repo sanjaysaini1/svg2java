@@ -79,7 +79,6 @@ public class Svg2Java2D extends JFrame implements FileDropListener {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		AppIcon appIcon = new AppIcon();
-		appIcon.setDimension(new Dimension(48, 48));
 		setIconImage(getImage(appIcon));
 		
 		JPanel leftPanel = new JPanel(new BorderLayout());
